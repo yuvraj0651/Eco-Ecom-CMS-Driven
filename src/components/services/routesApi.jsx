@@ -7,7 +7,7 @@ export const api = axios.create({
 // Fetch All Routes
 export const getRoutes = async () => {
   try {
-    const response = await api.get("/routes");
+    const response = await api.get("/cms-routes");
     const data = await response.data;
     return data;
   } catch (error) {
