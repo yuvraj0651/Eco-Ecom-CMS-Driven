@@ -27,7 +27,7 @@ const CartPage = () => {
 
   const deleteMutation = useMutation({
     mutationFn: (id) => removeCartItem(id),
-    onSuccess: (id) => {
+    onSuccess: (_ , id) => {
       queryClient.setQueryData(["cart"], (oldData = []) => {
         return oldData.filter((item) => item.id !== id);
       });
@@ -93,7 +93,7 @@ const CartPage = () => {
 
   const subTotal = useMemo(() => {
     return data?.reduce(
-      (total, item) => total + Number(item.quantity * item.price),
+      (total, item) => total + Number(Number(item.quantity) * Number(item.price)),
       0,
     );
   }, [data]);
@@ -103,7 +103,7 @@ const CartPage = () => {
 
   const grandTotal = useMemo(() => {
     return subTotal + shippingFee + tax;
-  }, [subTotal]);
+  }, [subTotal , shippingFee , tax]);
 
   return (
     <section className="cart items-center pb-14">

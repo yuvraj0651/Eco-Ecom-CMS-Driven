@@ -63,6 +63,24 @@ const ProductDetail = () => {
     quantity: 1,
   };
 
+  const existingCartItem = cartItems.find(
+    (item) =>
+      item.productId === product?.id &&
+      item.selectedColor === activeColor &&
+      item.selectedSize === activeSize,
+  );
+
+  const updateMutation = useMutation({
+    mutationFn: ({ id, updatedItem }) => updateCartItem(id, updatedItem),
+    onSuccess: (updatedData) => {
+      queryClient.setQueryData(["cart"], (oldData = []) => {
+        return oldData.map((item) =>
+          item.id === updatedData.id ? updatedData : item,
+        );
+      });
+    },
+  });
+
   const addCartHandler = () => {
     const existingCartItem = cartItems.find(
       (item) =>
@@ -78,7 +96,7 @@ const ProductDetail = () => {
       };
 
       updateMutation.mutate({
-        id: existingCartItem?.id,
+        id: existingCartItem.id,
         updatedItem,
       });
 
@@ -89,21 +107,6 @@ const ProductDetail = () => {
       toast.success("Product added to cart");
     }
   };
-
-  const updateMutation = useMutation({
-    mutationFn: ({ id, updatedItem }) => updateCartItem(id, updatedItem),
-    onSuccess: (updatedData) => {
-      queryClient.setQueryData(["cart"], (oldData = []) => {
-        return oldData.map((item) =>
-          item.id === updatedData.id ? updatedData : item,
-        );
-      });
-    },
-  });
-
-  const existingCartItem = cartItems.find(
-    (item) => item.productId === product?.id,
-  );
 
   const incrementQtyHandler = (item) => {
     setUpdatedId(item.id);
@@ -156,6 +159,10 @@ const ProductDetail = () => {
   }, [product]);
 
   useEffect(() => {
+  console.log("🔥 CART FROM API:", data);
+}, [data]);
+
+  useEffect(() => {
     if (product?.colors?.length) {
       setActiveColor(product?.colors?.[0]);
     }
@@ -176,10 +183,12 @@ const ProductDetail = () => {
 
   const isInCart = cartItems.some(
     (item) =>
-      item.productId === product?.productId &&
+      item.productId === product?.id &&
       item.selectedColor === activeColor &&
       item.selectedSize === activeSize,
   );
+
+  console.log(isInCart);
 
   if (isLoading) {
     return <p>Loading product data...</p>;

@@ -82,7 +82,7 @@ const Products = ({ debouncedSearch }) => {
   const addCartHandler = (product) => {
     const existingItem = cartItems?.find(
       (item) =>
-        item.id === product.id &&
+        item.productId === product.productId &&
         item.selectedColor === product.selectedColor &&
         item.selectedSize === product.selectedSize,
     );
@@ -98,9 +98,7 @@ const Products = ({ debouncedSearch }) => {
       });
 
       toast.success("Cart quantity updated");
-    }
-
-    else {
+    } else {
       addMutation.mutate(product);
 
       toast.success("Product added to cart");
@@ -593,10 +591,13 @@ const Products = ({ debouncedSearch }) => {
                   ) : (
                     paginatedProducts?.map((product) => {
                       const isInCart = cartItems.some(
-                        (item) => item.id === product.id,
+                        (item) =>
+                          item.productId === product.id &&
+                          item.selectedColor === product.colors?.[0] &&
+                          item.selectedSize === product.sizes?.[0],
                       );
                       const cartItem = {
-                        id: product?.id,
+                        productId: product?.id,
                         title: product?.title,
                         description: product?.description,
                         price: product?.price,
@@ -666,9 +667,6 @@ const Products = ({ debouncedSearch }) => {
                               <button
                                 onClick={() => {
                                   addCartHandler(cartItem);
-                                  toast.success(
-                                    "Product Added To Cart Successfully",
-                                  );
                                 }}
                                 disabled={addMutation.isPending}
                                 className={`shop__product-add-cart flex items-center justify-center gap-1 border-2 border-black py-[0.3rem] px-4 rounded-full shadow-sm flex-1 transition-colors duration-300 hover:bg-white hover:text-black ${

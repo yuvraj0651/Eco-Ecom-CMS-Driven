@@ -128,7 +128,7 @@ app.get("/api/:resource/:id", (req, res) => {
     }
 
     const item = db[resource].find(
-      (item) => item.id === Number(id)
+      (item) => String(item.id) === String(id)
     );
 
     if (!item) {
@@ -195,7 +195,7 @@ app.put("/api/:resource/:id", (req, res) => {
     }
 
     const itemIndex = db[resource].findIndex(
-      (item) => item.id === Number(id)
+      (item) => String(item.id) === String(id)
     );
 
     if (itemIndex === -1) {
@@ -240,7 +240,7 @@ app.delete("/api/:resource/:id", (req, res) => {
     }
 
     db[resource] = db[resource].filter(
-      (item) => item.id !== Number(id)
+      (item) => String(item.id) !== String(id)
     );
 
     writeDB(db);

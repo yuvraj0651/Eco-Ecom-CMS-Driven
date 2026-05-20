@@ -2219,18 +2219,7 @@
       "createdAt": "1778417298215"
     }
   ],
-  "cart": [
-    {
-      "id": "1",
-      "title": "Essence Mascara Lash Princess",
-      "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
-      "price": 9.99,
-      "image": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
-      "selectedColor": "#f472b6",
-      "selectedSize": "S",
-      "quantity": 1
-    }
-  ],
+  "cart": [],
   "checkout": [
     {
       "id": "04cd",
