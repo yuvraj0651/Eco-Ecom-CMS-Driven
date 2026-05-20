@@ -157,11 +157,7 @@ const ProductDetail = () => {
       setActiveImage(product.thumbnail);
     }
   }, [product]);
-
-  useEffect(() => {
-  console.log("🔥 CART FROM API:", data);
-}, [data]);
-
+  
   useEffect(() => {
     if (product?.colors?.length) {
       setActiveColor(product?.colors?.[0]);
