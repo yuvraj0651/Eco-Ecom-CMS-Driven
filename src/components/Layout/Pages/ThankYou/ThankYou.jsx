@@ -30,7 +30,7 @@ const ThankYou = () => {
     queryFn: getCheckoutData,
   });
 
-  const checkoutData = checkout.find((item) => item.id === id);
+  const checkoutData = checkout.find((item) => Number(item.id) === Number(id));
 
   const subTotal = checkoutData
     ? checkoutData?.orderedItems?.reduce(
