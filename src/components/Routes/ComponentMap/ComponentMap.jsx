@@ -14,7 +14,7 @@ export const componentMap = {
   HomePage,
   Products,
   ProductDetail,
-  AboutPage,
+  AuthPage,
   CartPage,
   Checkout,
   ThankYou,
