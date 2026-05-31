@@ -6,6 +6,9 @@
       "name": "Home",
       "component": "HomePage",
       "isProtected": false,
+      "status": "Active",
+      "isLazy": true,
+      "guards": [],
       "roles": [],
       "meta": {
         "title": "Home Page",
@@ -18,6 +21,9 @@
       "name": "AuthPage",
       "component": "AuthPage",
       "isProtected": false,
+      "status": "Active",
+      "isLazy": true,
+      "guards": [],
       "roles": [],
       "meta": {
         "title": "Auth Page",
@@ -30,6 +36,9 @@
       "name": "Products",
       "component": "Products",
       "isProtected": true,
+      "status": "Active",
+      "isLazy": true,
+      "guards": ["AuthGuard"],
       "roles": ["admin", "user"],
       "meta": {
         "title": "Shop Page",
@@ -42,6 +51,9 @@
       "name": "ProductDetail",
       "component": "ProductDetail",
       "isProtected": true,
+      "status": "Active",
+      "isLazy": true,
+      "guards": ["AuthGuard"],
       "roles": ["admin", "user"],
       "meta": {
         "title": "Product Detail Page",
@@ -54,6 +66,9 @@
       "name": "CartPage",
       "component": "CartPage",
       "isProtected": true,
+      "status": "Active",
+      "isLazy": true,
+      "guards": ["AuthGuard"],
       "roles": ["admin", "user"],
       "meta": {
         "title": "Cart Page",
@@ -66,6 +81,9 @@
       "name": "AboutPage",
       "component": "AboutPage",
       "isProtected": true,
+      "status": "Active",
+      "isLazy": true,
+      "guards": ["AuthGuard"],
       "roles": ["admin", "user"],
       "meta": {
         "title": "About Page",
@@ -78,6 +96,9 @@
       "name": "Checkout",
       "component": "Checkout",
       "isProtected": true,
+      "status": "Active",
+      "isLazy": true,
+      "guards": ["AuthGuard", "RoleGuard"],
       "roles": ["admin", "user"],
       "meta": {
         "title": "Checkout Page",
@@ -90,6 +111,9 @@
       "name": "ThankYou",
       "component": "ThankYou",
       "isProtected": true,
+      "status": "Active",
+      "isLazy": true,
+      "guards": ["AuthGuard", "RoleGuard"],
       "roles": ["admin", "user"],
       "meta": {
         "title": "Thank You Page",
