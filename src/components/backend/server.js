@@ -49,6 +49,13 @@ const writeDB = (data) => {
   );
 };
 
+const writeCmsRoutes = (data) => {
+  fs.writeFileSync(
+    cmsRoutesPath,
+    JSON.stringify(data, null, 2)
+  );
+};
+
 // ======================
 // READ CMS ROUTES
 // ======================
@@ -66,24 +73,97 @@ const readCmsRoutes = () => {
   }
 };
 
-// ======================
 // ROOT ROUTE
-// ======================
 app.get("/", (req, res) => {
   res.json({
     success: true,
-    message:
-      "Eco Ecom API Running Successfully 🚀",
+    message: "Eco Ecom API Running Successfully 🚀",
   });
 });
 
-// ======================
-// CMS ROUTES API
-// ======================
 app.get("/api/cms-routes", (req, res) => {
   const routes = readCmsRoutes();
-
   res.status(200).json(routes);
+});
+
+app.get("/api/cms-routes/:id", (req, res) => {
+  try {
+    const data = readCmsRoutes();
+
+    const route = data.routes.find(
+      (item) => String(item.id) === String(req.params.id)
+    );
+
+    if (!route) {
+      return res.status(404).json({
+        success: false,
+        message: "Route not found",
+      });
+    }
+
+    res.status(200).json(route);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.put("/api/cms-routes/:id", (req, res) => {
+  try {
+    const data = readCmsRoutes();
+
+    const routeIndex = data.routes.findIndex(
+      (item) => String(item.id) === String(req.params.id)
+    );
+
+    if (routeIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        message: "Route not found",
+      });
+    }
+
+    data.routes[routeIndex] = {
+      ...data.routes[routeIndex],
+      ...req.body,
+    };
+
+    writeCmsRoutes(data);
+
+    res.status(200).json(data.routes[routeIndex]);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.delete("/api/cms-routes/:id", (req, res) => {
+  try {
+    const data = readCmsRoutes();
+
+    data.routes = data.routes.filter(
+      (item) => String(item.id) !== String(req.params.id)
+    );
+
+    fs.writeFileSync(
+      cmsRoutesPath,
+      JSON.stringify(data, null, 2)
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Route deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 });
 
 // ======================
