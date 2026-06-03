@@ -81,6 +81,25 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/api/content", (req, res) => {
+  try {
+    const db = readDB();
+
+    res.status(200).json({
+      header: db.header,
+      homepage: db.homepage,
+      footer: db.footer,
+      aboutpage: db.aboutpage,
+      checkoutForm: db.checkoutForm,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
 app.get("/api/cms-routes", (req, res) => {
   const routes = readCmsRoutes();
   res.status(200).json(routes);
