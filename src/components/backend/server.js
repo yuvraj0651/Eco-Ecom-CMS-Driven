@@ -49,6 +49,19 @@ const writeDB = (data) => {
   );
 };
 
+app.get("/api/database", (req, res) => {
+  try {
+    const db = readDB();
+
+    res.status(200).json(db);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
 const writeCmsRoutes = (data) => {
   fs.writeFileSync(
     cmsRoutesPath,
