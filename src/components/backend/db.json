@@ -4053,5 +4053,58 @@
       "createdAt": "2026-05-12T10:30:00Z",
       "updatedAt": "2026-06-02T14:20:00Z"
     }
-  ]
+  ],
+   "settings": {
+    "general": {
+      "websiteName": "Eco Shopnexa Web",
+      "websiteUrl": "https://eco-shopnexa-web.netlify.app/",
+      "description": "Modern and Efficient Ecommerce Website To Shop"
+    },
+    "branding": {
+      "companyName": "Eco Shopnexa",
+      "supportEmail": "support@example.com",
+      "logoUrl": "",
+      "faviconUrl": ""
+    },
+    "seoDefaults": {
+      "metaTitle": "Eco Shopnexa - Modern Ecommerce Store",
+      "metaKeywords": "ecommerce, online shopping, fashion store, buy online",
+      "metaDescription": "Eco Shopnexa is a modern ecommerce platform offering latest products at best prices with fast delivery."
+    },
+    "email": {
+      "smtpHost": "",
+      "smtpPort": "",
+      "smtpUser": "",
+      "smtpPass": ""
+    },
+    "security": {
+      "twoFactorAuth": true,
+      "loginNotifications": true,
+      "strongPasswords": true,
+      "maintenanceMode": false
+    },
+    "roles": [
+      { "name": "Super Admin", "permissions": ["ALL"] },
+      { "name": "Editor", "permissions": ["CONTENT_EDIT"] }
+    ],
+    "integrations": {
+      "googleAnalytics": "GA-XXXX",
+      "googleTagManager": "",
+      "metaPixel": "",
+      "stripe": true,
+      "mailchimp": true,
+      "cloudinary": true
+    },
+
+    "analytics": {
+      "gaTrackingId": "",
+      "gtmId": "",
+      "metaPixelId": ""
+    },
+
+    "system": {
+      "lastBackup": "2026-06-10T02:45:00Z",
+      "maintenanceMode": false
+    }
+  }
 }
